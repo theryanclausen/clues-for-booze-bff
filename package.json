@@ -1,7 +1,7 @@
 {
   "name": "clues-for-booze-bff",
   "version": "1.0.0",
-  "main": "src/server.js",
+  "main": "dist/server.js",
   "repository": "https://github.com/theryanclausen/clues-for-booze-bff.git",
   "author": "theryanclausen <theryanclausen@gmail.com>",
   "license": "MIT",
@@ -10,6 +10,7 @@
     "dev": "concurrently -k -p \"{name}\" \"yarn watch-ts\" \"yarn watch-node\"",
     "watch-ts": "tsc -w",
     "build": "tsc",
+    "postinstall": "yarn build",
     "start": "node dist/server.js",
     "generate:schema-types": "graphql-codegen"
   },
