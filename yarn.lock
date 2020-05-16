@@ -2987,7 +2987,7 @@ graphql-tools-fork@9.0.1:
     node-fetch "^2.6.0"
     uuid "^7.0.2"
 
-graphql-tools@5.0.0:
+graphql-tools@5.0.0, graphql-tools@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-5.0.0.tgz#67281c834a0e29f458adba8018f424816fa627e9"
   integrity sha512-5zn3vtn//382b7G3Wzz3d5q/sh+f7tVrnxeuhTMTJ7pWJijNqLxH7VEzv8VwXCq19zAzHYEosFHfXiK7qzvk7w==
@@ -4757,11 +4757,6 @@ safe-regex@^1.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
-
-schema-tools@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/schema-tools/-/schema-tools-0.1.0.tgz#065798161a95cb3b2c1d99a1c58d3d5473cd16ec"
-  integrity sha1-BleYFhqVyzssHZmhxY09VHPNFuw=
 
 scuid@^1.0.2:
   version "1.1.0"

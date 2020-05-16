@@ -1,12 +1,12 @@
 import 'dotenv/config'
 import { ApolloServer } from 'apollo-server-express'
 import express from 'express'
-// import schema from './schema'
+import schema from './schema'
 
-// const server = new ApolloServer({schema});
+const server = new ApolloServer({schema});
  
 const app = express();
-// server.applyMiddleware({ app });
+server.applyMiddleware({ app });
 
 app.get('/', (req,res) => res.send("hello"))
 const PORT = process.env.PORT || 4000
