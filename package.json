@@ -10,7 +10,6 @@
     "dev": "concurrently -k -p \"{name}\" \"yarn watch-ts\" \"yarn watch-node\"",
     "watch-ts": "tsc -w",
     "build": "tsc",
-    "postinstall": "yarn build",
     "start": "node dist/server.js",
     "generate:schema-types": "graphql-codegen"
   },
