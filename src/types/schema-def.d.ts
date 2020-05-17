@@ -9,9 +9,15 @@ export type Scalars = {
   Float: number;
 };
 
+export type Category = {
+   __typename?: 'Category';
+  id: Scalars['Int'];
+  name: Scalars['String'];
+};
+
 export type Query = {
    __typename?: 'Query';
-  hello?: Maybe<Scalars['String']>;
+  categories?: Maybe<Array<Maybe<Category>>>;
 };
 
 
@@ -89,6 +95,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
+  Category: ResolverTypeWrapper<Category>,
+  Int: ResolverTypeWrapper<Scalars['Int']>,
   Query: ResolverTypeWrapper<{}>,
 };
 
@@ -96,14 +104,23 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   String: Scalars['String'],
   Boolean: Scalars['Boolean'],
+  Category: Category,
+  Int: Scalars['Int'],
   Query: {},
 };
 
+export type CategoryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Category'] = ResolversParentTypes['Category']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  categories?: Resolver<Maybe<Array<Maybe<ResolversTypes['Category']>>>, ParentType, ContextType>,
 };
 
 export type Resolvers<ContextType = any> = {
+  Category?: CategoryResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
 };
 
