@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -9,15 +10,48 @@ export type Scalars = {
   Float: number;
 };
 
+export enum Difficulty {
+  Easy = 'easy',
+  Hard = 'hard',
+  Medium = 'medium'
+}
+
+export enum QuestionType {
+  Boolean = 'boolean',
+  Multiple = 'multiple'
+}
+
 export type Category = {
    __typename?: 'Category';
   id: Scalars['Int'];
   name: Scalars['String'];
 };
 
+export type Question = {
+   __typename?: 'Question';
+  category: Scalars['String'];
+  correctAnswer: Scalars['String'];
+  difficulty: Difficulty;
+  incorrectAnswers?: Maybe<Array<Scalars['String']>>;
+  question: Scalars['String'];
+  questionType: QuestionType;
+};
+
+export type QuestionPayload = {
+   __typename?: 'QuestionPayload';
+  question?: Maybe<Question>;
+  responseCode: Scalars['Int'];
+};
+
 export type Query = {
    __typename?: 'Query';
   categories?: Maybe<Array<Maybe<Category>>>;
+  question?: Maybe<QuestionPayload>;
+};
+
+
+export type QueryQuestionArgs = {
+  category?: Maybe<Scalars['Int']>;
 };
 
 
@@ -95,8 +129,12 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
+  Difficulty: Difficulty,
+  QuestionType: QuestionType,
   Category: ResolverTypeWrapper<Category>,
   Int: ResolverTypeWrapper<Scalars['Int']>,
+  Question: ResolverTypeWrapper<Question>,
+  QuestionPayload: ResolverTypeWrapper<QuestionPayload>,
   Query: ResolverTypeWrapper<{}>,
 };
 
@@ -104,8 +142,12 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   String: Scalars['String'],
   Boolean: Scalars['Boolean'],
+  Difficulty: Difficulty,
+  QuestionType: QuestionType,
   Category: Category,
   Int: Scalars['Int'],
+  Question: Question,
+  QuestionPayload: QuestionPayload,
   Query: {},
 };
 
@@ -115,12 +157,31 @@ export type CategoryResolvers<ContextType = any, ParentType extends ResolversPar
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 };
 
+export type QuestionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Question'] = ResolversParentTypes['Question']> = {
+  category?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  correctAnswer?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  difficulty?: Resolver<ResolversTypes['Difficulty'], ParentType, ContextType>,
+  incorrectAnswers?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>,
+  question?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  questionType?: Resolver<ResolversTypes['QuestionType'], ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
+};
+
+export type QuestionPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['QuestionPayload'] = ResolversParentTypes['QuestionPayload']> = {
+  question?: Resolver<Maybe<ResolversTypes['Question']>, ParentType, ContextType>,
+  responseCode?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   categories?: Resolver<Maybe<Array<Maybe<ResolversTypes['Category']>>>, ParentType, ContextType>,
+  question?: Resolver<Maybe<ResolversTypes['QuestionPayload']>, ParentType, ContextType, RequireFields<QueryQuestionArgs, never>>,
 };
 
 export type Resolvers<ContextType = any> = {
   Category?: CategoryResolvers<ContextType>,
+  Question?: QuestionResolvers<ContextType>,
+  QuestionPayload?: QuestionPayloadResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
 };
 

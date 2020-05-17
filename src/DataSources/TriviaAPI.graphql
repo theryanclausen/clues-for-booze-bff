@@ -1,4 +1,29 @@
+enum Difficulty{
+    easy
+    medium
+    hard
+}
+
+enum QuestionType{
+    boolean
+    multiple
+}
+
 type Category {
     id:Int!
     name:String!
+}
+
+type Question {
+    category:String!
+    questionType:QuestionType!
+    difficulty:Difficulty!
+    question:String!
+    correctAnswer:String!
+    incorrectAnswers:[String!]
+}
+
+type QuestionPayload{
+    responseCode:Int!
+    question:Question
 }

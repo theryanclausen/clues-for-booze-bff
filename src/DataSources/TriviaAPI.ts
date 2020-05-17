@@ -3,7 +3,9 @@ import {
 } from 'apollo-datasource-rest'
 import {stringify} from 'qs'
 import {
-    Category
+    Category, 
+    QuestionPayload, 
+    QueryQuestionArgs
 } from '../types/schema-def'
 
 class JserviceAPI extends RESTDataSource{
@@ -19,6 +21,10 @@ class JserviceAPI extends RESTDataSource{
         }catch(e){
             return e
         }
+    }
+    
+    async getQuestion(args:QueryQuestionArgs):Promise<QuestionPayload>{
+        return this.get(`api.php?${stringify({amount:1,...args})}`)
     }
 }
 

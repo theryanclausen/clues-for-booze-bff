@@ -2,4 +2,5 @@
 
 type Query {
     categories:[Category]
+    question(category:Int):QuestionPayload
 }
