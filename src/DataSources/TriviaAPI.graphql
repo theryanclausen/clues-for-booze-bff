@@ -18,9 +18,9 @@ type Question {
     category:String!
     questionType:QuestionType!
     difficulty:Difficulty!
-    question:String!
-    correctAnswer:String!
-    incorrectAnswers:[String!]
+    question:DecodedString!
+    correctAnswer:DecodedString!
+    incorrectAnswers:[DecodedString!]
 }
 
 type QuestionPayload{

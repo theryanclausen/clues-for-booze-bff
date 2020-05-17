@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
@@ -8,6 +8,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DecodedString: string;
 };
 
 export enum Difficulty {
@@ -30,10 +31,10 @@ export type Category = {
 export type Question = {
    __typename?: 'Question';
   category: Scalars['String'];
-  correctAnswer: Scalars['String'];
+  correctAnswer: Scalars['DecodedString'];
   difficulty: Difficulty;
-  incorrectAnswers?: Maybe<Array<Scalars['String']>>;
-  question: Scalars['String'];
+  incorrectAnswers?: Maybe<Array<Scalars['DecodedString']>>;
+  question: Scalars['DecodedString'];
   questionType: QuestionType;
 };
 
@@ -42,6 +43,7 @@ export type QuestionPayload = {
   question?: Maybe<Question>;
   responseCode: Scalars['Int'];
 };
+
 
 export type Query = {
    __typename?: 'Query';
@@ -135,6 +137,7 @@ export type ResolversTypes = {
   Int: ResolverTypeWrapper<Scalars['Int']>,
   Question: ResolverTypeWrapper<Question>,
   QuestionPayload: ResolverTypeWrapper<QuestionPayload>,
+  DecodedString: ResolverTypeWrapper<Scalars['DecodedString']>,
   Query: ResolverTypeWrapper<{}>,
 };
 
@@ -148,6 +151,7 @@ export type ResolversParentTypes = {
   Int: Scalars['Int'],
   Question: Question,
   QuestionPayload: QuestionPayload,
+  DecodedString: Scalars['DecodedString'],
   Query: {},
 };
 
@@ -159,10 +163,10 @@ export type CategoryResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type QuestionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Question'] = ResolversParentTypes['Question']> = {
   category?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
-  correctAnswer?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  correctAnswer?: Resolver<ResolversTypes['DecodedString'], ParentType, ContextType>,
   difficulty?: Resolver<ResolversTypes['Difficulty'], ParentType, ContextType>,
-  incorrectAnswers?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>,
-  question?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  incorrectAnswers?: Resolver<Maybe<Array<ResolversTypes['DecodedString']>>, ParentType, ContextType>,
+  question?: Resolver<ResolversTypes['DecodedString'], ParentType, ContextType>,
   questionType?: Resolver<ResolversTypes['QuestionType'], ParentType, ContextType>,
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 };
@@ -173,6 +177,10 @@ export type QuestionPayloadResolvers<ContextType = any, ParentType extends Resol
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 };
 
+export interface DecodedStringScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DecodedString'], any> {
+  name: 'DecodedString'
+}
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   categories?: Resolver<Maybe<Array<Maybe<ResolversTypes['Category']>>>, ParentType, ContextType>,
   question?: Resolver<Maybe<ResolversTypes['QuestionPayload']>, ParentType, ContextType, RequireFields<QueryQuestionArgs, never>>,
@@ -182,6 +190,7 @@ export type Resolvers<ContextType = any> = {
   Category?: CategoryResolvers<ContextType>,
   Question?: QuestionResolvers<ContextType>,
   QuestionPayload?: QuestionPayloadResolvers<ContextType>,
+  DecodedString?: GraphQLScalarType,
   Query?: QueryResolvers<ContextType>,
 };
 
