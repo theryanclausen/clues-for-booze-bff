@@ -1,3 +1,6 @@
+#import * from '../DataSources/TriviaAPI.graphql'
+scalar DecodedString
 type Query {
-    hello:String
+    categories:[Category]
+    question(category:Int):QuestionPayload
 }

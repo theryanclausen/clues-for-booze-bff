@@ -1,9 +1,15 @@
 import 'dotenv/config'
 import { ApolloServer } from 'apollo-server-express'
 import express from 'express'
+import TriviaAPI from './DataSources/TriviaAPI'
 import schema from './schema'
 
-const server = new ApolloServer({schema});
+const server = new ApolloServer({
+  schema,
+  dataSources:()=>({
+    TriviaAPI: new TriviaAPI()
+  })
+});
  
 const app = express();
 server.applyMiddleware({ app });
