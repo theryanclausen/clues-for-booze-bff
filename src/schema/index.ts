@@ -31,7 +31,9 @@ const schema = makeExecutableSchema({
         categories:(_,{},{dataSources:{TriviaAPI}})=>
           TriviaAPI.getCategories(),
         question:(_,args,{dataSources:{TriviaAPI}})=>
-          TriviaAPI.getQuestion(args)
+          TriviaAPI.getQuestion(args),
+        drink:(_,{},{dataSources:{CocktailAPI}})=>
+          CocktailAPI.getDrink()
       }
     }
   });

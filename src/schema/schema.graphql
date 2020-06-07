@@ -1,6 +1,9 @@
 #import * from '../DataSources/TriviaAPI.graphql'
+#import * from '../DataSources/CocktailAPI.graphql'
+
 scalar DecodedString
 type Query {
     categories:[Category]
     question(category:Int):QuestionPayload
+    drink:Drink
 }

@@ -1,0 +1,7 @@
+type Drink{
+    id:String
+    name:String
+    instructions:String
+    thumbnail:String
+    ingredients:[String]
+}

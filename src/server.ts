@@ -2,11 +2,13 @@ import 'dotenv/config'
 import { ApolloServer } from 'apollo-server-express'
 import express from 'express'
 import TriviaAPI from './DataSources/TriviaAPI'
+import CocktailAPI from './DataSources/CocktailAPI'
 import schema from './schema'
 
 const server = new ApolloServer({
   schema,
   dataSources:()=>({
+    CocktailAPI: new CocktailAPI(),
     TriviaAPI: new TriviaAPI()
   })
 });

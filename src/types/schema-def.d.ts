@@ -11,6 +11,15 @@ export type Scalars = {
   DecodedString: string;
 };
 
+export type Drink = {
+   __typename?: 'Drink';
+  id?: Maybe<Scalars['String']>;
+  ingredients?: Maybe<Array<Maybe<Scalars['String']>>>;
+  instructions?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  thumbnail?: Maybe<Scalars['String']>;
+};
+
 export enum Difficulty {
   Easy = 'easy',
   Hard = 'hard',
@@ -48,6 +57,7 @@ export type QuestionPayload = {
 export type Query = {
    __typename?: 'Query';
   categories?: Maybe<Array<Maybe<Category>>>;
+  drink?: Maybe<Drink>;
   question?: Maybe<QuestionPayload>;
 };
 
@@ -131,6 +141,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
+  Drink: ResolverTypeWrapper<Drink>,
   Difficulty: Difficulty,
   QuestionType: QuestionType,
   Category: ResolverTypeWrapper<Category>,
@@ -145,6 +156,7 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   String: Scalars['String'],
   Boolean: Scalars['Boolean'],
+  Drink: Drink,
   Difficulty: Difficulty,
   QuestionType: QuestionType,
   Category: Category,
@@ -153,6 +165,15 @@ export type ResolversParentTypes = {
   QuestionPayload: QuestionPayload,
   DecodedString: Scalars['DecodedString'],
   Query: {},
+};
+
+export type DrinkResolvers<ContextType = any, ParentType extends ResolversParentTypes['Drink'] = ResolversParentTypes['Drink']> = {
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  ingredients?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>,
+  instructions?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  thumbnail?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
 };
 
 export type CategoryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Category'] = ResolversParentTypes['Category']> = {
@@ -183,10 +204,12 @@ export interface DecodedStringScalarConfig extends GraphQLScalarTypeConfig<Resol
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   categories?: Resolver<Maybe<Array<Maybe<ResolversTypes['Category']>>>, ParentType, ContextType>,
+  drink?: Resolver<Maybe<ResolversTypes['Drink']>, ParentType, ContextType>,
   question?: Resolver<Maybe<ResolversTypes['QuestionPayload']>, ParentType, ContextType, RequireFields<QueryQuestionArgs, never>>,
 };
 
 export type Resolvers<ContextType = any> = {
+  Drink?: DrinkResolvers<ContextType>,
   Category?: CategoryResolvers<ContextType>,
   Question?: QuestionResolvers<ContextType>,
   QuestionPayload?: QuestionPayloadResolvers<ContextType>,
